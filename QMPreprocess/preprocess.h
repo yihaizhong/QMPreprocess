@@ -3,7 +3,10 @@
 
 #include "qmpreprocess_global.h"
 
-class QMPREPROCESS_EXPORT Preprocess
+namespace qm{
+
+
+class DLL_EXPORT Preprocess
 {
 public:
 	Preprocess();
@@ -12,5 +15,5 @@ public:
 private:
 
 };
-
+}
 #endif // PREPROCESS_H

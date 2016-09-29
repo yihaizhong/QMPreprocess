@@ -4,9 +4,9 @@
 #include <QtCore/qglobal.h>
 
 #ifdef QMPREPROCESS_LIB
-# define QMPREPROCESS_EXPORT Q_DECL_EXPORT
+# define DLL_EXPORT Q_DECL_EXPORT
 #else
-# define QMPREPROCESS_EXPORT Q_DECL_IMPORT
+# define DLL_EXPORT Q_DECL_IMPORT
 #endif
 
 #endif // QMPREPROCESS_GLOBAL_H
