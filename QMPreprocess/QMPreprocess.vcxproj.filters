@@ -28,12 +28,42 @@
     <ClCompile Include="preprocess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="imagemodule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="posmodule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sensorinfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="posdata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="posreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="preprocess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="qmpreprocess_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imagemodule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="posmodule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sensorinfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="posdata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="posreader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
