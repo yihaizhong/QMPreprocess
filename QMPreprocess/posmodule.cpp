@@ -49,7 +49,7 @@ void PosModule::forEach(void(*fun)(PosData &pos_data))
 	}
 }
 
-void PosModule::readToVector()
+void PosModule::read()
 {
 	QFile file(pos_file_);
 	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))

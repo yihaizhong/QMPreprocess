@@ -94,7 +94,7 @@ void Preprocess::readPos(QString &pos_file, ePosFormat pos_foramt)
 {
 	pos_module_->set_pos_file(pos_file);
 	pos_module_->set_pos_format(pos_foramt);
-	pos_module_->readToVector();
+	pos_module_->read();
 }
 
 void Preprocess::makeImagePosFile()
