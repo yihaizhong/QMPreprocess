@@ -1,0 +1,12 @@
+#ifndef QMPREPROCESS_GLOBAL_H
+#define QMPREPROCESS_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#ifdef QMPREPROCESS_LIB
+# define QMPREPROCESS_EXPORT Q_DECL_EXPORT
+#else
+# define QMPREPROCESS_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // QMPREPROCESS_GLOBAL_H
