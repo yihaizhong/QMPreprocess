@@ -43,6 +43,21 @@
     <ClCompile Include="posreader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xyzposreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="xyzopkposreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lbhposreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lbhopkposreader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sensorinfodb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="preprocess.h">
@@ -64,6 +79,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="posreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xyzposreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xyzopkposreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lbhposreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lbhopkposreader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sensorinfodb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

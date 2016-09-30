@@ -4,18 +4,7 @@
 #include <QString>
 namespace qm{
 
-enum ePosFormat
-{
-	XYZOPK,
-	LBHOPK,
-	XYZ,
-	LBH
-};
-enum ePosModule
-{
-	PROJ4,
-	GDAL
-};
+enum ePosFormat;
 class PosReader;
 struct PosData;
 /**

@@ -12,14 +12,17 @@ namespace qm{
 
 
 Preprocess::Preprocess(QVector<QString> &image_files) :
-	image_files_(image_files)
+image_files_(image_files), image_module_(nullptr), pos_module_(nullptr)
 {
 
 }
 
 Preprocess::~Preprocess()
 {
-
+	if (image_module_)
+		delete image_module_;
+	if (pos_module_)
+		delete pos_module_;
 }
 
 
@@ -31,10 +34,10 @@ void Preprocess::setModule(eImageModule image_module, ePosModule pos_module)
 		delete pos_module_;
 	switch (image_module)
 	{
-	case qm::EXIV2:
+	case EXIV2:
 		image_module_ = new Exiv2ImageModule;
 		break;
-	case qm::EXIFTOOL:
+	case EXIFTOOL:
 		break;
 	default:
 		image_module_ = nullptr;
@@ -100,6 +103,7 @@ void Preprocess::readPos(QString &pos_file, ePosFormat pos_foramt)
 void Preprocess::makeImagePosFile()
 {
 	QString suffix = QFileInfo(image_files_[0]).suffix();
+	suffix.push_front(".");
 	pos_module_->appendContentToId(suffix);
 	pos_module_->writePosFile();
 }

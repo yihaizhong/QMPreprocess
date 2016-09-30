@@ -1,25 +1,25 @@
-﻿生成启动时间为 2016/9/29 23:49:34。
+﻿生成启动时间为 2016/9/30 23:17:50。
      1>项目“E:\myc++\myqt\QMPreprocess\QMPreprocess\QMPreprocess.vcxproj”在节点 2 上(Build 个目标)。
-     1>Link:
-         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\myc++\myqt\QMPreprocess\x64\Debug\\QMPreprocess.dll" /NOLOGO /LIBPATH:D:\Qt\Qt5.5.1\5.5\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.lib" /MACHINE:X64 /DLL x64\Debug\imagemodule.obj
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I..\ThirdParty\include /I.\GeneratedFiles /I. /ID:\Qt\Qt5.5.1\5.5\msvc2013_64\include /I.\GeneratedFiles\Debug /ID:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtCore /ID:\Qt\Qt5.5.1\5.5\msvc2013_64\include\QtXml /Zi /nologo /W1 /WX- /Od /D UNICODE /D WIN32 /D WIN64 /D QT_DLL /D QT_CORE_LIB /D QT_XML_LIB /D QMPREPROCESS_LIB /D _WINDLL /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /FR"x64\Debug\\" /Gd /TP /errorReport:prompt imagemodule.cpp
+         imagemodule.cpp
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\myc++\myqt\QMPreprocess\x64\Debug\\QMPreprocess.dll" /NOLOGO /LIBPATH:..\ThirdParty\lib /LIBPATH:D:\Qt\Qt5.5.1\5.5\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib exiv2d.lib proj_i.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.lib" /MACHINE:X64 /DLL x64\Debug\imagemodule.obj
+         x64\Debug\lbhopkposreader.obj
+         x64\Debug\lbhposreader.obj
          x64\Debug\posdata.obj
          x64\Debug\posmodule.obj
          x64\Debug\posreader.obj
          x64\Debug\preprocess.obj
          x64\Debug\sensorinfo.obj
-            正在创建库 E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.lib 和对象 E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.exp
-     1>imagemodule.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __cdecl qm::ImageModule::setHorizontal(void)" (?setHorizontal@ImageModule@qm@@UEAAXXZ)
-     1>imagemodule.obj : error LNK2001: 无法解析的外部符号 "public: virtual bool __cdecl qm::ImageModule::checkSensorInfo(void)" (?checkSensorInfo@ImageModule@qm@@UEAA_NXZ)
-     1>imagemodule.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __cdecl qm::ImageModule::writeInfoFile(void)" (?writeInfoFile@ImageModule@qm@@UEAAXXZ)
-     1>imagemodule.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __cdecl qm::ImageModule::enhance(void)" (?enhance@ImageModule@qm@@UEAAXXZ)
-     1>preprocess.obj : error LNK2019: 无法解析的外部符号 "public: void __cdecl qm::ImageModule::set_image_file(class QString &)" (?set_image_file@ImageModule@qm@@QEAAXAEAVQString@@@Z)，该符号在函数 "public: void __cdecl qm::Preprocess::setImageHorizontal(void)" (?setImageHorizontal@Preprocess@qm@@QEAAXXZ) 中被引用
-     1>preprocess.obj : error LNK2019: 无法解析的外部符号 "public: class qm::SensorInfo * __cdecl qm::ImageModule::get_sensor_info(void)const " (?get_sensor_info@ImageModule@qm@@QEBAPEAVSensorInfo@2@XZ)，该符号在函数 "public: void __cdecl qm::Preprocess::makeSensorFile(class QString &)" (?makeSensorFile@Preprocess@qm@@QEAAXAEAVQString@@@Z) 中被引用
-     1>preprocess.obj : error LNK2019: 无法解析的外部符号 "public: void __cdecl qm::ImageModule::set_sensor_info(class qm::SensorInfo *)" (?set_sensor_info@ImageModule@qm@@QEAAXPEAVSensorInfo@2@@Z)，该符号在函数 "public: void __cdecl qm::Preprocess::setSensor(class qm::SensorInfo *)" (?setSensor@Preprocess@qm@@QEAAXPEAVSensorInfo@2@@Z) 中被引用
-     1>sensorinfo.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __cdecl qm::SensorInfo::readExifInfo(class QString &)" (?readExifInfo@SensorInfo@qm@@UEAAXAEAVQString@@@Z)
-     1>sensorinfo.obj : error LNK2001: 无法解析的外部符号 "public: virtual void __cdecl qm::SensorInfo::writeToFile(class QString &)" (?writeToFile@SensorInfo@qm@@UEAAXAEAVQString@@@Z)
-     1>E:\myc++\myqt\QMPreprocess\x64\Debug\\QMPreprocess.dll : fatal error LNK1120: 9 个无法解析的外部命令
-     1>已完成生成项目“E:\myc++\myqt\QMPreprocess\QMPreprocess\QMPreprocess.vcxproj”(Build 个目标)的操作 - 失败。
+         x64\Debug\sensorinfodb.obj
+         x64\Debug\xyzopkposreader.obj
+         x64\Debug\xyzposreader.obj
+         QMPreprocess.vcxproj -> E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.dll
+       BscMake:
+         D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.bsc" /n x64\Debug\imagemodule.sbr x64\Debug\lbhopkposreader.sbr x64\Debug\lbhposreader.sbr x64\Debug\posdata.sbr x64\Debug\posmodule.sbr x64\Debug\posreader.sbr x64\Debug\preprocess.sbr x64\Debug\sensorinfo.sbr x64\Debug\sensorinfodb.sbr x64\Debug\xyzopkposreader.sbr x64\Debug\xyzposreader.sbr
+     1>已完成生成项目“E:\myc++\myqt\QMPreprocess\QMPreprocess\QMPreprocess.vcxproj”(Build 个目标)的操作。
 
-生成失败。
+生成成功。
 
-已用时间 00:00:00.72
+已用时间 00:00:17.35

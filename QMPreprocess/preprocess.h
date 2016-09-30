@@ -6,9 +6,6 @@ class QString;
 template<class T>
 class QVector;
 namespace qm{
-enum ePosFormat;
-enum eImageModule;
-enum ePosModule;
 class SensorInfo;
 class ImageModule;
 class PosModule;
@@ -16,7 +13,17 @@ class PosModule;
 class DLL_EXPORT Preprocess
 {
 public:
+	enum eImageModule
+	{
+		EXIV2,
+		EXIFTOOL
+	};
 
+	enum ePosModule
+	{
+		PROJ4,
+		GDAL
+	};
 	Preprocess(QVector<QString>& image_files);
 	~Preprocess();
 	void setModule(eImageModule image_module,ePosModule pos_module);

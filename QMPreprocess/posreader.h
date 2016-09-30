@@ -13,13 +13,12 @@ public:
 	PosReader();
 	~PosReader();
     /**
-     * @brief read the default format: id x y z phi omega kappa
+     * @brief read the default format: id x y z 
      * @param slist the string list of above
      * @return pos data
      */
-	virtual PosData read(QStringList &slist);
+	virtual PosData read(QStringList &slist) = 0;
 };
-typedef PosReader XYZOPKPosReader;
 }
 
 #endif // POSREADER_H

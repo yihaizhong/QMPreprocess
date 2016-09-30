@@ -8,5 +8,5 @@
 #else
 # define DLL_EXPORT Q_DECL_IMPORT
 #endif
-
+#include "common.h"
 #endif // QMPREPROCESS_GLOBAL_H
