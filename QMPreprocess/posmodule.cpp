@@ -4,7 +4,9 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QTextStream>
+#include <QTextCodec>
 #include <QDomDocument>
+#include <QPair>
 #include "posdata.h"
 #include "xyzposreader.h"
 #include "xyzopkposreader.h"
@@ -179,6 +181,92 @@ void PosModule::writePosFile()
 	}
 }
 
+void GetPairs(QVector<PosData> &pos_data, QVector<QPair<QString,QString>> &pairs)
+{
+	QVector<QVector<PosData>> bands;
+	double average = 0;
+	QVector<PosData> band;
+	bool start = true;
+	for (int i = 0; i < pos_data.size();++i)
+	{
+		if (start)
+		{
+			band.push_back(pos_data[i]);
+			average = pos_data[i].kappa;
+			start = false;
+		}
+		else
+		{
+			if (abs(average - pos_data[i].kappa) < 90)
+			{
+				band.push_back(pos_data[i]);
+				average = ((band.size() - 1) * average + pos_data[i].kappa) / band.size();
+			}
+			else
+			{
+				bands.push_back(band);
+				band.clear();
+				start = true;
+				--i;
+			}
+		}
+	}
+	//push the last result
+	bands.push_back(band);
+	
+	for (int i = 0; i < bands.size();++i)
+	{
+#pragma region in band
+		for (int j = 0;j<bands[i].size()-4;++j)
+		{
+			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 1].id));
+			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 2].id));
+			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 3].id));
+			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 4].id));
+		}
+		int rm = bands[i].size() - 4;
+		if (rm < 0)
+			rm = 0;
+		for (int j = rm; j<bands[i].size();++j)
+		{
+			for (int k = j + 1; k < bands[i].size();++k)
+			{
+				pairs.push_back(qMakePair(bands[i][j].id, bands[i][k].id));
+			}
+			
+		}
+#pragma endregion
+
+#pragma region next band
+		if (i != bands.size() - 1)
+		{
+			for (int j = 0; j < bands[i].size();++j)
+			{
+				PosData pd = bands[i][j];
+				QVector<PosData> &next_band = bands[i + 1];
+				QVector<QPair<double, int>> distance;
+				for (int k = 0; k < next_band.size();++k)
+				{
+					double dis = sqrt(pow(pd.x - next_band[k].x, 2) +
+						pow(pd.y - next_band[k].y, 2) +
+						pow(pd.z - next_band[k].z, 2));
+					distance.push_back(qMakePair(dis, k));
+				}
+				qSort(distance.begin(), distance.end(),
+					[](QPair<double, int> &d1, QPair<double, int> &d2){return d1.first < d2.first; });
+				int get_cnt = 5;
+				if (distance.size() < 5)
+					get_cnt = distance.size();
+				for (int k = 0; k < get_cnt;++k)
+				{
+					pairs.push_back(qMakePair(pd.id, next_band[distance[k].second].id));
+				}
+			}
+		}
+#pragma endregion
+
+	}
+}
 //find a threshold 
 double FindThreshod(QVector<PosData> &pos_data)
 {
@@ -215,25 +303,34 @@ void PosModule::writePairFile(QString &pair_file)
 	doc.appendChild(instruction);
 	auto root = doc.createElement("SauvegardeNamedRel");
 	doc.appendChild(root);
-
-	for (int i = 0; i < pos_data_.size(); ++i)
+	QVector<QPair<QString, QString>> pairs;
+	GetPairs(pos_data_, pairs);
+	for (int i = 0; i < pairs.size();++i)
 	{
-		for (int j = 0; j < pos_data_.size() - 1;++j)
-		{
-			double dis = sqrt(pow(pos_data_[i].x - pos_data_[j].x, 2.0) +
-					pow(pos_data_[i].y - pos_data_[j].y, 2.0) +
-					pow(pos_data_[i].z - pos_data_[j].z, 2));
-			if (dis <= threshold)
-			{
-				QDomElement cple_node = doc.createElement("Cple");
-				root.appendChild(cple_node);
+		QDomElement cple_node = doc.createElement("Cple");
+		root.appendChild(cple_node);
 
-				QDomText cple = doc.createTextNode(pos_data_[i].id + " " + pos_data_[j].id);
-				cple_node.appendChild(cple);
-			}
-		}
-
+		QDomText cple = doc.createTextNode(pairs[i].first + " " + pairs[i].second);
+		cple_node.appendChild(cple);
 	}
+	//for (int i = 0; i < pos_data_.size(); ++i)
+	//{
+	//	for (int j = i + 1; j < pos_data_.size();++j)
+	//	{
+	//		double dis = sqrt(pow(pos_data_[i].x - pos_data_[j].x, 2.0) +
+	//				pow(pos_data_[i].y - pos_data_[j].y, 2.0) +
+	//				pow(pos_data_[i].z - pos_data_[j].z, 2));
+	//		if (dis <= threshold)
+	//		{
+	//			QDomElement cple_node = doc.createElement("Cple");
+	//			root.appendChild(cple_node);
+
+	//			QDomText cple = doc.createTextNode(pos_data_[i].id + " " + pos_data_[j].id);
+	//			cple_node.appendChild(cple);
+	//		}
+	//	}
+
+	//}
 	QTextStream stream(&file);
 	doc.save(stream, 4, doc.EncodingFromTextStream);
 	file.close();

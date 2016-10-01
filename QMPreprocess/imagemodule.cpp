@@ -96,7 +96,7 @@ void ImageModule::writeInfoFile()
 	doc.appendChild(instruction);
 	QDomElement root = doc.createElement("XmlXifInfo");
 
-	QDomElement hg = doc.createElement("HGrev");
+	QDomElement hg = doc.createElement("HGRev");
 	hg.appendChild(doc.createTextNode("-1"));
 	root.appendChild(hg);
 

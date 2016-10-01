@@ -38,8 +38,8 @@ PosData LBHPosReader::read(QStringList &slist)
 		throw QString("init proj failed!");
 
 	projLP lp;
-	lp.u = pos_data.longitude;
-	lp.v = pos_data.latitude;
+	lp.u = pos_data.longitude * DEG_TO_RAD;
+	lp.v = pos_data.latitude * DEG_TO_RAD;
 	projXY xy= pj_fwd(lp, proj);
 	pos_data.x = xy.u;
 	pos_data.y = xy.v;

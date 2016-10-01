@@ -152,6 +152,12 @@ void SensorInfo::writeToFile(QString &info_file)
 		" " + QString::number(height_mm_));
 	szcapt_node.appendChild(szcapt);
 	camera_entry.appendChild(szcapt_node);
+
+	QDomElement shortname_node = doc.createElement("ShortName");
+	QDomText shortname = doc.createTextNode(camera_type_);
+	shortname_node.appendChild(shortname);
+	camera_entry.appendChild(shortname_node);
+
 	local_data.appendChild(camera_entry);
 	root.appendChild(local_data);
 	doc.appendChild(root);

@@ -4,7 +4,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <QTDIR>D:\Qt\Qt5.5.1\5.5\msvc2013_64</QTDIR>
     <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
-    <LocalDebuggerCommandArguments>F:\ytdata\ytwork\yldtp</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>F:\ytdata\hld</LocalDebuggerCommandArguments>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
