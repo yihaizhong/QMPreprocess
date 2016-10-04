@@ -21,11 +21,14 @@ void SensorInfoDB::readFromDBFile()
 		auto camera = camera_list.at(i);
 		QString camera_name = camera.toElement().elementsByTagName("Name").at(0).toElement().text();
 		QString szcaptmm = camera.toElement().elementsByTagName("SzCaptMm").at(0).toElement().text();
-		QStringList wh = szcaptmm.split(" +|,");
+		QStringList wh = szcaptmm.split(QRegExp(" +|,"));
 		if (wh.size()!=2)
 			continue;
 		SensorInfo *sensor_info = new SensorInfo;
-		sensor_db_[camera_name] = sensor_info;
+		sensor_info->set_camera_type(camera_name);
+		sensor_info->set_width_mm(wh[0].toDouble());
+		sensor_info->set_height_mm(wh[1].toDouble());
+		sensor_db_[camera_name.trimmed()] = sensor_info;
 	}
 	dbfile.close();
 }
@@ -40,9 +43,10 @@ void SensorInfoDB::writeToDBFile()
 	auto instruction = doc.createProcessingInstruction("xml", "version=\"1.0\"");
 	doc.appendChild(instruction);
 	auto root = doc.createElement("CameraDataBase");
+	doc.appendChild(root);
 	for (auto bg = sensor_db_.begin(); bg != sensor_db_.end();++bg)
 	{
-		SensorInfo *sensor_info = *bg;
+		SensorInfo *sensor_info = (*bg);
 		auto camera_entry = doc.createElement("CameraEntry");
 		QDomElement name_node = doc.createElement("Name");
 		auto name = doc.createTextNode(sensor_info->get_camera_type());
@@ -109,6 +113,7 @@ void SensorInfoDB::addSensorInfo(SensorInfo *sensor_info)
 {
 	if (!isInDB(sensor_info))
 	{
+		sensor_db_[sensor_info->get_camera_type()] = sensor_info;
 		writeToDBFile();
 	}
 }

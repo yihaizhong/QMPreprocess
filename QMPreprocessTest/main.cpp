@@ -7,6 +7,7 @@
 #include "preprocess.h"
 #include "common.h"
 #include "sensorinfo.h"
+#include "sensorinfodb.h"
 
 int main(int argc, char *argv[])
 {
@@ -29,6 +30,7 @@ int main(int argc, char *argv[])
 		sensor_info->set_width_mm(23.5);
 		sensor_info->set_height_mm(15.6);
 		pp.setSensor(sensor_info);
+		qm::SensorInfoDB::instance()->addSensorInfo(sensor_info);
 		delete sensor_info;
 	}
 	QString sensor_file(work_dir.absolutePath() + "/MicMac-LocalChantierDescripteur.xml");

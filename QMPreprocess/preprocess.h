@@ -41,6 +41,8 @@ public:
 
 	void enhanceImage();
 
+	QVector<QString> get_image_files()const;
+	double getPosHeight();
 private:
 	QVector<QString> &image_files_;
 	ImageModule *image_module_;

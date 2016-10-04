@@ -336,4 +336,14 @@ void PosModule::writePairFile(QString &pair_file)
 	file.close();
 }
 
+double PosModule::getAverageHeight() const
+{
+	double sum = 0;
+	for (int i = 0; i < pos_data_.size();++i)
+	{
+		sum += pos_data_[i].z;
+	}
+	return sum / pos_data_.size();
+}
+
 }

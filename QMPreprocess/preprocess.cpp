@@ -122,4 +122,14 @@ void Preprocess::enhanceImage()
 	}
 }
 
+QVector<QString> Preprocess::get_image_files() const
+{
+	return image_files_;
+}
+
+double Preprocess::getPosHeight()
+{
+	return pos_module_->getAverageHeight();
+}
+
 }

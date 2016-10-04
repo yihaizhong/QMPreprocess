@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="System"?>
+<CameraDataBase>
+    <CameraEntry>
+        <Name>Canon EOS 6D</Name>
+        <SzCaptMm>24 36</SzCaptMm>
+    </CameraEntry>
+    <CameraEntry>
+        <Name>ILCE-5100</Name>
+        <SzCaptMm>23.5 15.6</SzCaptMm>
+    </CameraEntry>
+</CameraDataBase>

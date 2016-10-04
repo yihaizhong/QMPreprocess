@@ -13,7 +13,15 @@ namespace qm{
 
 SensorInfo::SensorInfo()
 {
-
+	camera_type_ = "";
+	bay_pat_ = "RVWB";
+	orientation_ = "Horizontal (normal)";
+	focal_length_ = -1;
+	focal_length35_ = -1;
+	width_ = -1;
+	height_ = -1;
+	width_mm_ = -1;
+	height_mm_ = -1;
 }
 
 SensorInfo::SensorInfo(const SensorInfo& sensor_info)
@@ -54,9 +62,19 @@ QString SensorInfo::get_camera_type() const
 	return camera_type_;
 }
 
+void SensorInfo::set_camera_type(QString &camera_type)
+{
+	camera_type_ = camera_type;
+}
+
 double SensorInfo::get_focal_length() const
 {
 	return focal_length_;
+}
+
+void SensorInfo::set_focal_length(double focal_length)
+{
+	focal_length_ = focal_length;
 }
 
 double SensorInfo::get_height_mm() const

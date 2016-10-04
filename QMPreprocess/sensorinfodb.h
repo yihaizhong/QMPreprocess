@@ -1,12 +1,13 @@
 #ifndef SENSORINFODB_H
 #define SENSORINFODB_H
+#include "qmpreprocess_global.h"
 #include <QMap>
 
 namespace qm{
 
 
 class SensorInfo;
-class SensorInfoDB
+class DLL_EXPORT SensorInfoDB
 {
 public:
 	~SensorInfoDB();

@@ -49,6 +49,8 @@ public:
      * @param pair_file
      */
 	virtual void writePairFile(QString &pair_file);
+
+	double getAverageHeight()const;
 private:
 	QString pos_file_;
 	PosReader *reader_;
