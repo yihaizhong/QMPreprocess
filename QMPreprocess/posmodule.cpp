@@ -7,6 +7,7 @@
 #include <QTextCodec>
 #include <QDomDocument>
 #include <QPair>
+#include<QSet>
 #include "posdata.h"
 #include "xyzposreader.h"
 #include "xyzopkposreader.h"
@@ -180,6 +181,10 @@ void PosModule::writePosFile()
 		WritePosInfo(*bg, info_file);
 	}
 }
+inline double GetDistance(const PosData &p1, const PosData &p2)
+{
+	return sqrt(pow(p1.x - p2.x, 2) + pow(p1.y - p2.y, 2) + pow(p1.z - p2.z, 2));
+}
 
 void GetPairs(QVector<PosData> &pos_data, QVector<QPair<QString,QString>> &pairs)
 {
@@ -213,16 +218,28 @@ void GetPairs(QVector<PosData> &pos_data, QVector<QPair<QString,QString>> &pairs
 	}
 	//push the last result
 	bands.push_back(band);
+	QMap<QString, QSet<QString>> pair_map;
+	QVector<QString> ids;
+	for (auto bg = pos_data.begin(); bg != pos_data.end();++bg)
+	{
+		ids.push_back(bg->id);
+	}
 	
 	for (int i = 0; i < bands.size();++i)
 	{
+		
 #pragma region in band
 		for (int j = 0;j<bands[i].size()-4;++j)
 		{
-			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 1].id));
-			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 2].id));
-			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 3].id));
-			pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 4].id));
+			//pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 1].id));
+			//pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 2].id));
+			//pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 3].id));
+			//pairs.push_back(qMakePair(bands[i][j].id, bands[i][j + 4].id));
+			auto &pset = pair_map[bands[i][j].id];
+			pset.insert(bands[i][j + 1].id);
+			pset.insert(bands[i][j + 2].id);
+			pset.insert(bands[i][j + 3].id);
+			pset.insert(bands[i][j + 4].id);
 		}
 		int rm = bands[i].size() - 4;
 		if (rm < 0)
@@ -231,7 +248,9 @@ void GetPairs(QVector<PosData> &pos_data, QVector<QPair<QString,QString>> &pairs
 		{
 			for (int k = j + 1; k < bands[i].size();++k)
 			{
-				pairs.push_back(qMakePair(bands[i][j].id, bands[i][k].id));
+				//pairs.push_back(qMakePair(bands[i][j].id, bands[i][k].id));
+				auto &pset = pair_map[bands[i][j].id];
+				pset.insert(bands[i][k].id);
 			}
 			
 		}
@@ -242,14 +261,12 @@ void GetPairs(QVector<PosData> &pos_data, QVector<QPair<QString,QString>> &pairs
 		{
 			for (int j = 0; j < bands[i].size();++j)
 			{
-				PosData pd = bands[i][j];
+				PosData &pd = bands[i][j];
 				QVector<PosData> &next_band = bands[i + 1];
 				QVector<QPair<double, int>> distance;
 				for (int k = 0; k < next_band.size();++k)
 				{
-					double dis = sqrt(pow(pd.x - next_band[k].x, 2) +
-						pow(pd.y - next_band[k].y, 2) +
-						pow(pd.z - next_band[k].z, 2));
+					double dis = GetDistance(pd, next_band[k]);
 					distance.push_back(qMakePair(dis, k));
 				}
 				qSort(distance.begin(), distance.end(),
@@ -259,12 +276,52 @@ void GetPairs(QVector<PosData> &pos_data, QVector<QPair<QString,QString>> &pairs
 					get_cnt = distance.size();
 				for (int k = 0; k < get_cnt;++k)
 				{
-					pairs.push_back(qMakePair(pd.id, next_band[distance[k].second].id));
+					//pairs.push_back(qMakePair(pd.id, next_band[distance[k].second].id));
+					auto &pset = pair_map[bands[i][j].id];
+					pset.insert(next_band[distance[k].second].id);
 				}
 			}
 		}
 #pragma endregion
+	}
+	for (auto bg = pair_map.begin(); bg != pair_map.end();++bg)
+	{
+		const QString &ps = bg.key();
+		int index = ids.indexOf(ps);
+		double dis = -1;
 
+		//get the max distance
+		for (auto p = bg->begin(); p != bg->end();++p)
+		{
+			int jindex = ids.indexOf(*p);
+			double tdis = GetDistance(pos_data[index],pos_data[jindex]);
+			if (tdis > dis)
+				dis = tdis;
+		}
+
+		//insert who lesser than max distance
+		for (int i = 0; i < pos_data.size(); ++i)
+		{
+			double tdis = GetDistance(pos_data[index], pos_data[i]);
+			if (tdis < dis&& tdis != 0)
+			{
+				if (index < i)
+				{
+					auto &pset = pair_map[ps];
+					pset.insert(pos_data[i].id);
+				}
+				else
+				{
+					auto &pset = pair_map[pos_data[i].id];
+					pset.insert(pos_data[index].id);
+				}
+					
+			}
+		}
+		for (auto p = bg->begin(); p != bg->end(); ++p)
+		{
+			pairs.push_back(qMakePair(ps, *p));
+		}
 	}
 }
 //find a threshold 
