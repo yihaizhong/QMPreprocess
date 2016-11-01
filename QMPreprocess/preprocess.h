@@ -43,6 +43,9 @@ public:
 
 	QVector<QString> get_image_files()const;
 	double getPosHeight();
+
+	Preprocess(const Preprocess&) = delete;
+	Preprocess &operator=(const Preprocess&) = delete;
 private:
 	QVector<QString> &image_files_;
 	ImageModule *image_module_;

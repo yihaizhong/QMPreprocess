@@ -7,12 +7,20 @@
 #include "sensorinfodb.h"
 #include "exiv2/exiv2.hpp"
 
+
+
 namespace qm{
 
 
 ImageModule::ImageModule() :image_file_("")
 {
 	sensor_info_ = new SensorInfo;
+}
+
+ImageModule::ImageModule(const ImageModule &im) : ImageModule()
+{
+	image_file_ = im.image_file_;
+	*sensor_info_ = *im.sensor_info_;
 }
 
 ImageModule::~ImageModule()
@@ -134,7 +142,27 @@ void ImageModule::writeInfoFile()
 
 void ImageModule::enhance()
 {
+#if USE_ELISE
+	auto image_in = image_file_.toLocal8Bit();
+	QFileInfo file_info(image_file_);
+	QString name_out = file_info.fileName();//+"_sfs.tif";
+	QString dir(file_info.absolutePath());
+	dir.append("/SFS");
+	bool b=QDir().mkdir(dir);
+	dir.append("/");
+	auto image_out = (dir + name_out).toLocal8Bit();
+	image_out.push_front("NameOut=");
+	char *argv[] = { "PrepSift", image_in.data(), image_out.data() };
+	PreparSift_Main_yt(3, argv);
+#endif
 	//not implement now
+}
+
+ImageModule & ImageModule::operator=(const ImageModule &im)
+{
+	image_file_ = im.image_file_;
+	*sensor_info_ = *im.sensor_info_;
+	return *this;
 }
 
 }

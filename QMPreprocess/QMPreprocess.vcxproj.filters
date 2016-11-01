@@ -58,6 +58,9 @@
     <ClCompile Include="sensorinfodb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="prepsift.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="preprocess.h">

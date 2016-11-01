@@ -1,23 +1,25 @@
-﻿生成启动时间为 2016/10/15 23:38:42。
+﻿生成启动时间为 2016/10/29 0:27:33。
      1>项目“E:\myc++\myqt\QMPreprocess\QMPreprocess\QMPreprocess.vcxproj”在节点 2 上(Build 个目标)。
      1>Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\myc++\myqt\QuickMosaic\x64\Debug\\QMPreprocess.dll" /NOLOGO /LIBPATH:..\ThirdParty\lib /LIBPATH:D:\Qt\Qt5.5.1\5.5\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Xmld.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib exiv2d.lib proj_i.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\myc++\myqt\QuickMosaic\x64\Debug\QMPreprocess.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\myc++\myqt\QuickMosaic\x64\Debug\QMPreprocess.lib" /MACHINE:X64 /DLL x64\Debug\imagemodule.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\myc++\myqt\QMPreprocess\x64\Debug\\QMPreprocess.dll" /NOLOGO /LIBPATH:..\ThirdParty\lib /LIBPATH:D:\Qt\Qt5.5.1\5.5\msvc2013_64\lib qtmaind.lib Qt5Cored.lib Qt5Xmld.lib exiv2d.lib proj_i.lib ytslibd.lib opencv_core310d.lib opencv_imgcodecs310d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.lib" /MACHINE:X64 /DLL x64\Debug\imagemodule.obj
          x64\Debug\lbhopkposreader.obj
          x64\Debug\lbhposreader.obj
          x64\Debug\posdata.obj
          x64\Debug\posmodule.obj
          x64\Debug\posreader.obj
          x64\Debug\preprocess.obj
+         x64\Debug\prepsift.obj
          x64\Debug\sensorinfo.obj
          x64\Debug\sensorinfodb.obj
          x64\Debug\xyzopkposreader.obj
          x64\Debug\xyzposreader.obj
-            正在创建库 E:\myc++\myqt\QuickMosaic\x64\Debug\QMPreprocess.lib 和对象 E:\myc++\myqt\QuickMosaic\x64\Debug\QMPreprocess.exp
-         QMPreprocess.vcxproj -> E:\myc++\myqt\QuickMosaic\x64\Debug\QMPreprocess.dll
+         QMPreprocess.vcxproj -> E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.dll
        BscMake:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"E:\myc++\myqt\QuickMosaic\x64\Debug\QMPreprocess.bsc" /n x64\Debug\imagemodule.sbr x64\Debug\lbhopkposreader.sbr x64\Debug\lbhposreader.sbr x64\Debug\posdata.sbr x64\Debug\posmodule.sbr x64\Debug\posreader.sbr x64\Debug\preprocess.sbr x64\Debug\sensorinfo.sbr x64\Debug\sensorinfodb.sbr x64\Debug\xyzopkposreader.sbr x64\Debug\xyzposreader.sbr
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\bscmake.exe /nologo /o"E:\myc++\myqt\QMPreprocess\x64\Debug\QMPreprocess.bsc" /n x64\Debug\imagemodule.sbr x64\Debug\lbhopkposreader.sbr x64\Debug\lbhposreader.sbr x64\Debug\posdata.sbr x64\Debug\posmodule.sbr x64\Debug\posreader.sbr x64\Debug\preprocess.sbr x64\Debug\prepsift.sbr x64\Debug\sensorinfo.sbr x64\Debug\sensorinfodb.sbr x64\Debug\xyzopkposreader.sbr x64\Debug\xyzposreader.sbr
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\xmemory0(803): warning BK4504: 文件包含的引用太多；忽略来自此源的进一步引用
+     1>c:\program files (x86)\microsoft visual studio 12.0\vc\include\list(1205): warning BK4504: 文件包含的引用太多；忽略来自此源的进一步引用
      1>已完成生成项目“E:\myc++\myqt\QMPreprocess\QMPreprocess\QMPreprocess.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:02.62
+已用时间 00:00:08.61

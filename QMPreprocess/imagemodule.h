@@ -10,6 +10,8 @@ class ImageModule
 public:
 	ImageModule();
 	~ImageModule();
+	ImageModule(const ImageModule&);
+	ImageModule &operator=(const ImageModule&);
 	void set_image_file(QString &image_file);
 	SensorInfo* get_sensor_info()const;
 	void set_sensor_info(SensorInfo *sensor_info);
@@ -28,7 +30,7 @@ public:
      */
 	virtual void writeInfoFile();
     /**
-     * @brief enhance the image, not implemant now!
+     * @brief enhance the image
      */
 	virtual void enhance();
 

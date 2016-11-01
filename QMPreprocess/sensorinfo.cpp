@@ -4,16 +4,18 @@
 #include <QTextStream>
 #include <QDomDocument>
 
+#include "opencv2/opencv.hpp"
 #include "exiv2/exiv2.hpp"
 #include "sensorinfodb.h"
 #include "sensorinfodb.h"
+#include "QFileInfo"
 
 namespace qm{
 
 
 SensorInfo::SensorInfo()
 {
-	camera_type_ = "";
+	camera_type_ = "custom";
 	bay_pat_ = "RVWB";
 	orientation_ = "Horizontal (normal)";
 	focal_length_ = -1;
@@ -135,9 +137,19 @@ void SensorInfo::readExifInfo(QString &image_file)
 		//{
 		//	focal_length35_ = focal_length_;
 		//}
+		rel = exifData.findKey(Exiv2::ExifKey("Exif.Photo.PixelXDimension"));
+		if (rel != exifData.end())
+		{
+			width_ = exifData["Exif.Photo.PixelXDimension"].getValue()->toLong();
+			height_ = exifData["Exif.Photo.PixelYDimension"].getValue()->toLong();
+		}
+		else
+		{
+			cv::Mat img = cv::imread(image_file.toStdString());
+			width_ = img.cols;
+			height_ = img.rows;
+		}
 
-		width_ = exifData["Exif.Photo.PixelXDimension"].getValue()->toLong();
-		height_ = exifData["Exif.Photo.PixelYDimension"].getValue()->toLong();
 
 		//find if the sensor data base contains the information
 		//SensorInfoDB::instance()->isInDB(this);
@@ -178,10 +190,33 @@ void SensorInfo::writeToFile(QString &info_file)
 
 	local_data.appendChild(camera_entry);
 	root.appendChild(local_data);
+
 	doc.appendChild(root);
 	QTextStream stream(&sensor_file);
 	doc.save(stream, 4, doc.EncodingFromTextStream);
 	sensor_file.close();
+
+	//this is for calculating the resolution when there is no pos 
+	/*QFile camera_file(QFileInfo(info_file).absolutePath() + "camera.xml");
+	if (!camera_file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
+		throw QString("can not create or open the file->" + camera_file.fileName());
+
+	QDomDocument camera_doc;
+	instruction = camera_doc.createProcessingInstruction("xml", "version=\"1.0\"");
+	camera_doc.appendChild(instruction);
+	root = camera_doc.createElement("Camera");
+	camera_doc.appendChild(root);
+	root.appendChild(name_node);
+	QDomElement pr_node = camera_doc.createElement("PixelResolution");
+	auto pr = camera_doc.createTextNode(QString::number(width_mm_ / width_));
+	root.appendChild(pr_node);
+	QDomElement fl_node = camera_doc.createElement("FocalLenthMM");
+	auto fl = camera_doc.createTextNode(QString::number(focal_length_));
+	root.appendChild(fl_node);
+
+	QTextStream stream_camera(&camera_file);
+	camera_doc.save(stream_camera, 4, camera_doc.EncodingFromTextStream);
+	camera_file.close();*/
 }
 
 QString SensorInfo::get_bay_pat() const
